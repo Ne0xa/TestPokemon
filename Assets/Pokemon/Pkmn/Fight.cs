@@ -7,15 +7,8 @@ namespace Pkmn
     {
         public Fight(Character character1, Character character2)
         {
-            if (character1 == null)
-            {
-                throw new ArgumentNullException(nameof(character1));
-            }
-
-            if (character2 == null)
-            {
-                throw new ArgumentNullException(nameof(character2));
-            }
+            if (character1 == null) throw new ArgumentNullException(nameof(character1));
+            if (character2 == null) throw new ArgumentNullException(nameof(character2));
             
             Character1 = character1;
             Character2 = character2;
@@ -36,15 +29,8 @@ namespace Pkmn
         /// <exception cref="ArgumentNullException">si une des deux attaques est null</exception>
         public void ExecuteTurn(Skill skillFromCharacter1, Skill skillFromCharacter2)
         {
-            if (skillFromCharacter1 == null)
-            {
-                throw new ArgumentNullException(nameof(skillFromCharacter1));
-            }
-
-            if (skillFromCharacter2 == null)
-            {
-                throw new ArgumentNullException(nameof(skillFromCharacter2));
-            }
+            if (skillFromCharacter1 == null) throw new ArgumentNullException(nameof(skillFromCharacter1));
+            if (skillFromCharacter2 == null) throw new ArgumentNullException(nameof(skillFromCharacter2));
             
             if (IsFightFinished) return;
 
