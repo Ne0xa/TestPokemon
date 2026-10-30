@@ -35,6 +35,8 @@ namespace Pkmn
             _baseDefense = baseDefense;
             _baseSpeed = baseSpeed;
             _baseType = baseType;
+            
+            CurrentHealth = MaxHealth;
         }
         /// <summary>
         /// HP actuel du personnage
@@ -48,7 +50,7 @@ namespace Pkmn
         {
             get
             {
-                throw new NotImplementedException();
+                return CurrentEquipment != null ? _baseHealth + CurrentEquipment.BonusHealth : _baseHealth;
             }
         }
         /// <summary>
@@ -58,7 +60,7 @@ namespace Pkmn
         {
             get
             {
-                throw new NotImplementedException();
+                return CurrentEquipment != null ? _baseAttack + CurrentEquipment.BonusAttack : _baseAttack;
             }
         }
         /// <summary>
@@ -68,7 +70,7 @@ namespace Pkmn
         {
             get
             {
-                throw new NotImplementedException();
+                return CurrentEquipment != null ? _baseDefense + CurrentEquipment.BonusDefense : _baseDefense;
             }
         }
         /// <summary>
@@ -78,7 +80,7 @@ namespace Pkmn
         {
             get
             {
-                throw new NotImplementedException();
+                return CurrentEquipment != null ? _baseSpeed + CurrentEquipment.BonusSpeed : _baseSpeed;
             }
         }
         /// <summary>
@@ -90,7 +92,7 @@ namespace Pkmn
         /// </summary>
         public StatusEffect CurrentStatus { get; private set; }
 
-        public bool IsAlive => throw new NotImplementedException();
+        public bool IsAlive => CurrentHealth > 0;
 
 
         /// <summary>
@@ -102,7 +104,13 @@ namespace Pkmn
         /// <exception cref="NotImplementedException"></exception>
         public void ReceiveAttack(Skill s)
         {
-            throw new NotImplementedException();
+            if (s == null)
+            {
+                throw new ArgumentNullException(nameof(s));
+            }
+            
+            int damage = Math.Max(0, s.Power - Defense);
+            CurrentHealth = Math.Max(0, CurrentHealth - damage);
         }
         /// <summary>
         /// Equipe un objet au personnage
@@ -111,14 +119,19 @@ namespace Pkmn
         /// <exception cref="ArgumentNullException">Si equipement est null</exception>
         public void Equip(Equipment newEquipment)
         {
-            throw new NotImplementedException();
+            if (newEquipment == null)
+            {
+                throw new ArgumentNullException(nameof(newEquipment));
+            }
+            
+            CurrentEquipment =  newEquipment;
         }
         /// <summary>
         /// Desequipe l'objet en cours au personnage
         /// </summary>
         public void Unequip()
         {
-            throw new NotImplementedException();
+            CurrentEquipment = null;
         }
 
     }

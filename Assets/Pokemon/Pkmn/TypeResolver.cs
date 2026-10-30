@@ -27,7 +27,28 @@ namespace Pkmn
         /// </returns>
         public static float GetFactor(TYPE attacker, TYPE receiver)
         {
-            throw new NotImplementedException();
+            if (attacker == receiver)
+            {
+                return 1.0f;
+            }
+
+            switch (attacker)
+            {
+                case TYPE.WATER:
+                    if (receiver == TYPE.GRASS) return 1.2f;
+                    if (receiver == TYPE.FIRE) return 0.8f;
+                    break;
+                case TYPE.FIRE:
+                    if (receiver == TYPE.WATER) return 1.2f;
+                    if (receiver ==  TYPE.GRASS) return 0.8f;
+                    break;
+                case  TYPE.GRASS:
+                    if (receiver == TYPE.FIRE) return 1.2f;
+                    if (receiver == TYPE.WATER) return 0.8f;
+                    break;
+            }
+            
+            return 1.0f;
         }
 
     }
